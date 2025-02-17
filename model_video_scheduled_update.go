@@ -22,9 +22,9 @@ var _ MappedNullable = &VideoScheduledUpdate{}
 
 // VideoScheduledUpdate struct for VideoScheduledUpdate
 type VideoScheduledUpdate struct {
-	Privacy *VideoPrivacySet `json:"privacy,omitempty"`
 	// When to update the video
-	UpdateAt time.Time `json:"updateAt"`
+	UpdateAt time.Time        `json:"updateAt"`
+	Privacy  *VideoPrivacySet `json:"privacy,omitempty"`
 }
 
 type _VideoScheduledUpdate VideoScheduledUpdate
@@ -45,6 +45,30 @@ func NewVideoScheduledUpdate(updateAt time.Time) *VideoScheduledUpdate {
 func NewVideoScheduledUpdateWithDefaults() *VideoScheduledUpdate {
 	this := VideoScheduledUpdate{}
 	return &this
+}
+
+// GetUpdateAt returns the UpdateAt field value
+func (o *VideoScheduledUpdate) GetUpdateAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.UpdateAt
+}
+
+// GetUpdateAtOk returns a tuple with the UpdateAt field value
+// and a boolean to check if the value has been set.
+func (o *VideoScheduledUpdate) GetUpdateAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UpdateAt, true
+}
+
+// SetUpdateAt sets field value
+func (o *VideoScheduledUpdate) SetUpdateAt(v time.Time) {
+	o.UpdateAt = v
 }
 
 // GetPrivacy returns the Privacy field value if set, zero value otherwise.
@@ -79,30 +103,6 @@ func (o *VideoScheduledUpdate) SetPrivacy(v VideoPrivacySet) {
 	o.Privacy = &v
 }
 
-// GetUpdateAt returns the UpdateAt field value
-func (o *VideoScheduledUpdate) GetUpdateAt() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.UpdateAt
-}
-
-// GetUpdateAtOk returns a tuple with the UpdateAt field value
-// and a boolean to check if the value has been set.
-func (o *VideoScheduledUpdate) GetUpdateAtOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.UpdateAt, true
-}
-
-// SetUpdateAt sets field value
-func (o *VideoScheduledUpdate) SetUpdateAt(v time.Time) {
-	o.UpdateAt = v
-}
-
 func (o VideoScheduledUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -113,10 +113,10 @@ func (o VideoScheduledUpdate) MarshalJSON() ([]byte, error) {
 
 func (o VideoScheduledUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["updateAt"] = o.UpdateAt
 	if !IsNil(o.Privacy) {
 		toSerialize["privacy"] = o.Privacy
 	}
-	toSerialize["updateAt"] = o.UpdateAt
 	return toSerialize, nil
 }
 

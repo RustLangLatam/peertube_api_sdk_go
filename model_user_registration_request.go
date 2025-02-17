@@ -26,11 +26,11 @@ type UserRegistrationRequest struct {
 	Password string `json:"password"`
 	// email of the user, used for login or service communications
 	Email string `json:"email"`
+	// reason for the user to register on the instance
+	RegistrationReason string `json:"registrationReason"`
 	// editable name of the user, displayed in its representations
 	DisplayName *string              `json:"displayName,omitempty"`
 	Channel     *RegisterUserChannel `json:"channel,omitempty"`
-	// reason for the user to register on the instance
-	RegistrationReason string `json:"registrationReason"`
 }
 
 type _UserRegistrationRequest UserRegistrationRequest
@@ -128,6 +128,30 @@ func (o *UserRegistrationRequest) SetEmail(v string) {
 	o.Email = v
 }
 
+// GetRegistrationReason returns the RegistrationReason field value
+func (o *UserRegistrationRequest) GetRegistrationReason() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.RegistrationReason
+}
+
+// GetRegistrationReasonOk returns a tuple with the RegistrationReason field value
+// and a boolean to check if the value has been set.
+func (o *UserRegistrationRequest) GetRegistrationReasonOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RegistrationReason, true
+}
+
+// SetRegistrationReason sets field value
+func (o *UserRegistrationRequest) SetRegistrationReason(v string) {
+	o.RegistrationReason = v
+}
+
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
 func (o *UserRegistrationRequest) GetDisplayName() string {
 	if o == nil || IsNil(o.DisplayName) {
@@ -192,30 +216,6 @@ func (o *UserRegistrationRequest) SetChannel(v RegisterUserChannel) {
 	o.Channel = &v
 }
 
-// GetRegistrationReason returns the RegistrationReason field value
-func (o *UserRegistrationRequest) GetRegistrationReason() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.RegistrationReason
-}
-
-// GetRegistrationReasonOk returns a tuple with the RegistrationReason field value
-// and a boolean to check if the value has been set.
-func (o *UserRegistrationRequest) GetRegistrationReasonOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RegistrationReason, true
-}
-
-// SetRegistrationReason sets field value
-func (o *UserRegistrationRequest) SetRegistrationReason(v string) {
-	o.RegistrationReason = v
-}
-
 func (o UserRegistrationRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -229,13 +229,13 @@ func (o UserRegistrationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["username"] = o.Username
 	toSerialize["password"] = o.Password
 	toSerialize["email"] = o.Email
+	toSerialize["registrationReason"] = o.RegistrationReason
 	if !IsNil(o.DisplayName) {
 		toSerialize["displayName"] = o.DisplayName
 	}
 	if !IsNil(o.Channel) {
 		toSerialize["channel"] = o.Channel
 	}
-	toSerialize["registrationReason"] = o.RegistrationReason
 	return toSerialize, nil
 }
 

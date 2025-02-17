@@ -13,7 +13,6 @@ package peertube_api_sdk
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -235,14 +234,11 @@ func (a *SessionAPIService) GetOAuthTokenExecute(r ApiGetOAuthTokenRequest) (*Ge
 		parameterAddToHeaderOrQuery(localVarFormParams, "username", r.username, "", "")
 	}
 	if r.password != nil {
-		fmt.Printf("r.password: %v\n", r.password)
 		parameterAddToHeaderOrQuery(localVarFormParams, "password", r.password, "", "")
 	}
 	if r.refreshToken != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "refresh_token", r.refreshToken, "", "")
 	}
-	fmt.Printf("localVarPath: %v\n", localVarPostBody)
-
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

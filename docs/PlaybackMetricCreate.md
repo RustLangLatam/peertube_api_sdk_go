@@ -5,17 +5,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PlayerMode** | **string** |  | 
-**Resolution** | Pointer to **float32** | Current player video resolution | [optional] 
-**Fps** | Pointer to **float32** | Current player video fps | [optional] 
 **P2pEnabled** | **bool** |  | 
-**P2pPeers** | Pointer to **float32** | P2P peers connected (doesn&#39;t include WebSeed peers) | [optional] 
 **ResolutionChanges** | **float32** | How many resolution changes occurred since the last metric creation | 
-**BufferStalled** | Pointer to **float32** | How many times buffer has been stalled since the last metric creation | [optional] 
 **Errors** | **float32** | How many errors occurred since the last metric creation | 
 **DownloadedBytesP2P** | **float32** | How many bytes were downloaded with P2P since the last metric creation | 
 **DownloadedBytesHTTP** | **float32** | How many bytes were downloaded with HTTP since the last metric creation | 
 **UploadedBytesP2P** | **float32** | How many bytes were uploaded with P2P since the last metric creation | 
 **VideoId** | [**ApiV1VideosOwnershipIdAcceptPostIdParameter**](ApiV1VideosOwnershipIdAcceptPostIdParameter.md) |  | 
+**Resolution** | Pointer to **float32** | Current player video resolution | [optional] 
+**Fps** | Pointer to **float32** | Current player video fps | [optional] 
+**P2pPeers** | Pointer to **float32** | P2P peers connected (doesn&#39;t include WebSeed peers) | [optional] 
+**BufferStalled** | Pointer to **float32** | How many times buffer has been stalled since the last metric creation | [optional] 
 
 ## Methods
 
@@ -56,56 +56,6 @@ and a boolean to check if the value has been set.
 SetPlayerMode sets PlayerMode field to given value.
 
 
-### GetResolution
-
-`func (o *PlaybackMetricCreate) GetResolution() float32`
-
-GetResolution returns the Resolution field if non-nil, zero value otherwise.
-
-### GetResolutionOk
-
-`func (o *PlaybackMetricCreate) GetResolutionOk() (*float32, bool)`
-
-GetResolutionOk returns a tuple with the Resolution field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResolution
-
-`func (o *PlaybackMetricCreate) SetResolution(v float32)`
-
-SetResolution sets Resolution field to given value.
-
-### HasResolution
-
-`func (o *PlaybackMetricCreate) HasResolution() bool`
-
-HasResolution returns a boolean if a field has been set.
-
-### GetFps
-
-`func (o *PlaybackMetricCreate) GetFps() float32`
-
-GetFps returns the Fps field if non-nil, zero value otherwise.
-
-### GetFpsOk
-
-`func (o *PlaybackMetricCreate) GetFpsOk() (*float32, bool)`
-
-GetFpsOk returns a tuple with the Fps field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFps
-
-`func (o *PlaybackMetricCreate) SetFps(v float32)`
-
-SetFps sets Fps field to given value.
-
-### HasFps
-
-`func (o *PlaybackMetricCreate) HasFps() bool`
-
-HasFps returns a boolean if a field has been set.
-
 ### GetP2pEnabled
 
 `func (o *PlaybackMetricCreate) GetP2pEnabled() bool`
@@ -126,31 +76,6 @@ and a boolean to check if the value has been set.
 SetP2pEnabled sets P2pEnabled field to given value.
 
 
-### GetP2pPeers
-
-`func (o *PlaybackMetricCreate) GetP2pPeers() float32`
-
-GetP2pPeers returns the P2pPeers field if non-nil, zero value otherwise.
-
-### GetP2pPeersOk
-
-`func (o *PlaybackMetricCreate) GetP2pPeersOk() (*float32, bool)`
-
-GetP2pPeersOk returns a tuple with the P2pPeers field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetP2pPeers
-
-`func (o *PlaybackMetricCreate) SetP2pPeers(v float32)`
-
-SetP2pPeers sets P2pPeers field to given value.
-
-### HasP2pPeers
-
-`func (o *PlaybackMetricCreate) HasP2pPeers() bool`
-
-HasP2pPeers returns a boolean if a field has been set.
-
 ### GetResolutionChanges
 
 `func (o *PlaybackMetricCreate) GetResolutionChanges() float32`
@@ -170,31 +95,6 @@ and a boolean to check if the value has been set.
 
 SetResolutionChanges sets ResolutionChanges field to given value.
 
-
-### GetBufferStalled
-
-`func (o *PlaybackMetricCreate) GetBufferStalled() float32`
-
-GetBufferStalled returns the BufferStalled field if non-nil, zero value otherwise.
-
-### GetBufferStalledOk
-
-`func (o *PlaybackMetricCreate) GetBufferStalledOk() (*float32, bool)`
-
-GetBufferStalledOk returns a tuple with the BufferStalled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBufferStalled
-
-`func (o *PlaybackMetricCreate) SetBufferStalled(v float32)`
-
-SetBufferStalled sets BufferStalled field to given value.
-
-### HasBufferStalled
-
-`func (o *PlaybackMetricCreate) HasBufferStalled() bool`
-
-HasBufferStalled returns a boolean if a field has been set.
 
 ### GetErrors
 
@@ -295,6 +195,106 @@ and a boolean to check if the value has been set.
 
 SetVideoId sets VideoId field to given value.
 
+
+### GetResolution
+
+`func (o *PlaybackMetricCreate) GetResolution() float32`
+
+GetResolution returns the Resolution field if non-nil, zero value otherwise.
+
+### GetResolutionOk
+
+`func (o *PlaybackMetricCreate) GetResolutionOk() (*float32, bool)`
+
+GetResolutionOk returns a tuple with the Resolution field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResolution
+
+`func (o *PlaybackMetricCreate) SetResolution(v float32)`
+
+SetResolution sets Resolution field to given value.
+
+### HasResolution
+
+`func (o *PlaybackMetricCreate) HasResolution() bool`
+
+HasResolution returns a boolean if a field has been set.
+
+### GetFps
+
+`func (o *PlaybackMetricCreate) GetFps() float32`
+
+GetFps returns the Fps field if non-nil, zero value otherwise.
+
+### GetFpsOk
+
+`func (o *PlaybackMetricCreate) GetFpsOk() (*float32, bool)`
+
+GetFpsOk returns a tuple with the Fps field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFps
+
+`func (o *PlaybackMetricCreate) SetFps(v float32)`
+
+SetFps sets Fps field to given value.
+
+### HasFps
+
+`func (o *PlaybackMetricCreate) HasFps() bool`
+
+HasFps returns a boolean if a field has been set.
+
+### GetP2pPeers
+
+`func (o *PlaybackMetricCreate) GetP2pPeers() float32`
+
+GetP2pPeers returns the P2pPeers field if non-nil, zero value otherwise.
+
+### GetP2pPeersOk
+
+`func (o *PlaybackMetricCreate) GetP2pPeersOk() (*float32, bool)`
+
+GetP2pPeersOk returns a tuple with the P2pPeers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetP2pPeers
+
+`func (o *PlaybackMetricCreate) SetP2pPeers(v float32)`
+
+SetP2pPeers sets P2pPeers field to given value.
+
+### HasP2pPeers
+
+`func (o *PlaybackMetricCreate) HasP2pPeers() bool`
+
+HasP2pPeers returns a boolean if a field has been set.
+
+### GetBufferStalled
+
+`func (o *PlaybackMetricCreate) GetBufferStalled() float32`
+
+GetBufferStalled returns the BufferStalled field if non-nil, zero value otherwise.
+
+### GetBufferStalledOk
+
+`func (o *PlaybackMetricCreate) GetBufferStalledOk() (*float32, bool)`
+
+GetBufferStalledOk returns a tuple with the BufferStalled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBufferStalled
+
+`func (o *PlaybackMetricCreate) SetBufferStalled(v float32)`
+
+SetBufferStalled sets BufferStalled field to given value.
+
+### HasBufferStalled
+
+`func (o *PlaybackMetricCreate) HasBufferStalled() bool`
+
+HasBufferStalled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

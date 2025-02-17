@@ -10,7 +10,13 @@ import (
 
 func main() {
 	baseUrl := "https://peertube.orderi.co"
-	config := openapiclient.NewConfigurationFromBaseURL(baseUrl)
+
+	config := openapiclient.NewConfiguration()
+	_, err := config.ServerURLWithContext(context.Background(), baseUrl)
+	if err != nil {
+		return
+	}
+
 	apiClient := openapiclient.NewAPIClient(config)
 
 	ctx := context.Background()
@@ -30,6 +36,6 @@ func main() {
 		log.Fatal(err)
 	} else {
 		videoMap, _ := response.MarshalJSON()
-		fmt.Printf("Response: %v\nVideo Title: %v\n", response, string(videoMap))
+		fmt.Printf("Video: %v\n", string(videoMap))
 	}
 }

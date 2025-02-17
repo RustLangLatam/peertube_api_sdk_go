@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | **interface{}** | Channel display name | 
+**Name** | **string** | username of the channel to create | 
 **Description** | Pointer to **interface{}** | Channel description | [optional] 
 **Support** | Pointer to **interface{}** | How to support/fund the channel | [optional] 
-**Name** | **string** | username of the channel to create | 
 
 ## Methods
 
@@ -58,6 +58,26 @@ SetDisplayName sets DisplayName field to given value.
 `func (o *VideoChannelCreate) UnsetDisplayName()`
 
 UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
+### GetName
+
+`func (o *VideoChannelCreate) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *VideoChannelCreate) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *VideoChannelCreate) SetName(v string)`
+
+SetName sets Name field to given value.
+
+
 ### GetDescription
 
 `func (o *VideoChannelCreate) GetDescription() interface{}`
@@ -128,26 +148,6 @@ HasSupport returns a boolean if a field has been set.
 `func (o *VideoChannelCreate) UnsetSupport()`
 
 UnsetSupport ensures that no value is present for Support, not even an explicit nil
-### GetName
-
-`func (o *VideoChannelCreate) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *VideoChannelCreate) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *VideoChannelCreate) SetName(v string)`
-
-SetName sets Name field to given value.
-
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

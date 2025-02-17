@@ -106,7 +106,6 @@ func (obj *ApiV1VideosOwnershipIdAcceptPostIdParameter) GetActualInstance() inte
 		return nil
 	}
 	if obj.Int32 != nil {
-		//fmt.Println("int32: ", *obj.Int32)
 		return obj.Int32
 	}
 

@@ -110,15 +110,15 @@ func NewConfiguration() *Configuration {
 		Debug:         false,
 		Servers: ServerConfigurations{
 			{
-				URL:         "https://peertube.orderi.co",
+				URL:         "https://peertube2.cpy.re",
 				Description: "Live Test Server (live data - latest nightly version)",
 			},
 			{
-				URL:         "https://peertube.orderi.co",
+				URL:         "https://peertube3.cpy.re",
 				Description: "Live Test Server (live data - latest RC version)",
 			},
 			{
-				URL:         "https://peertube.orderi.co",
+				URL:         "https://peertube.cpy.re",
 				Description: "Live Test Server (live data - stable version)",
 			},
 		},

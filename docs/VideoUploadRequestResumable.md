@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Video name | 
 **ChannelId** | **int32** | Channel id that will contain this video | 
+**Filename** | **string** | Video filename including extension | 
 **Privacy** | Pointer to [**VideoPrivacySet**](VideoPrivacySet.md) |  | [optional] 
 **Category** | Pointer to **int32** | category id of the video (see [/videos/categories](#operation/getCategories)) | [optional] 
 **Licence** | Pointer to **int32** | licence id of the video (see [/videos/licences](#operation/getLicences)) | [optional] 
@@ -24,7 +25,6 @@ Name | Type | Description | Notes
 **Thumbnailfile** | Pointer to ***os.File** | Video thumbnail file | [optional] 
 **Previewfile** | Pointer to ***os.File** | Video preview file | [optional] 
 **VideoPasswords** | Pointer to **[]string** |  | [optional] 
-**Filename** | **string** | Video filename including extension | 
 
 ## Methods
 
@@ -83,6 +83,26 @@ and a boolean to check if the value has been set.
 `func (o *VideoUploadRequestResumable) SetChannelId(v int32)`
 
 SetChannelId sets ChannelId field to given value.
+
+
+### GetFilename
+
+`func (o *VideoUploadRequestResumable) GetFilename() string`
+
+GetFilename returns the Filename field if non-nil, zero value otherwise.
+
+### GetFilenameOk
+
+`func (o *VideoUploadRequestResumable) GetFilenameOk() (*string, bool)`
+
+GetFilenameOk returns a tuple with the Filename field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilename
+
+`func (o *VideoUploadRequestResumable) SetFilename(v string)`
+
+SetFilename sets Filename field to given value.
 
 
 ### GetPrivacy
@@ -534,26 +554,6 @@ SetVideoPasswords sets VideoPasswords field to given value.
 `func (o *VideoUploadRequestResumable) HasVideoPasswords() bool`
 
 HasVideoPasswords returns a boolean if a field has been set.
-
-### GetFilename
-
-`func (o *VideoUploadRequestResumable) GetFilename() string`
-
-GetFilename returns the Filename field if non-nil, zero value otherwise.
-
-### GetFilenameOk
-
-`func (o *VideoUploadRequestResumable) GetFilenameOk() (*string, bool)`
-
-GetFilenameOk returns a tuple with the Filename field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFilename
-
-`func (o *VideoUploadRequestResumable) SetFilename(v string)`
-
-SetFilename sets Filename field to given value.
-
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

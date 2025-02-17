@@ -23,12 +23,12 @@ var _ MappedNullable = &VideoChannelCreate{}
 type VideoChannelCreate struct {
 	// Channel display name
 	DisplayName interface{} `json:"displayName"`
+	// username of the channel to create
+	Name string `json:"name" validate:"regexp=^[a-zA-Z0-9\\\\\\\\-_.:]+$"`
 	// Channel description
 	Description interface{} `json:"description,omitempty"`
 	// How to support/fund the channel
 	Support interface{} `json:"support,omitempty"`
-	// username of the channel to create
-	Name string `json:"name" validate:"regexp=^[a-zA-Z0-9\\\\\\\\-_.:]+$"`
 }
 
 type _VideoChannelCreate VideoChannelCreate
@@ -76,6 +76,30 @@ func (o *VideoChannelCreate) GetDisplayNameOk() (*interface{}, bool) {
 // SetDisplayName sets field value
 func (o *VideoChannelCreate) SetDisplayName(v interface{}) {
 	o.DisplayName = v
+}
+
+// GetName returns the Name field value
+func (o *VideoChannelCreate) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *VideoChannelCreate) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *VideoChannelCreate) SetName(v string) {
+	o.Name = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -144,30 +168,6 @@ func (o *VideoChannelCreate) SetSupport(v interface{}) {
 	o.Support = v
 }
 
-// GetName returns the Name field value
-func (o *VideoChannelCreate) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *VideoChannelCreate) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *VideoChannelCreate) SetName(v string) {
-	o.Name = v
-}
-
 func (o VideoChannelCreate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -181,13 +181,13 @@ func (o VideoChannelCreate) ToMap() (map[string]interface{}, error) {
 	if o.DisplayName != nil {
 		toSerialize["displayName"] = o.DisplayName
 	}
+	toSerialize["name"] = o.Name
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
 	if o.Support != nil {
 		toSerialize["support"] = o.Support
 	}
-	toSerialize["name"] = o.Name
 	return toSerialize, nil
 }
 

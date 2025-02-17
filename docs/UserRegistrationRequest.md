@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **Username** | **string** | immutable name of the user, used to find or mention its actor | 
 **Password** | **string** |  | 
 **Email** | **string** | email of the user, used for login or service communications | 
+**RegistrationReason** | **string** | reason for the user to register on the instance | 
 **DisplayName** | Pointer to **string** | editable name of the user, displayed in its representations | [optional] 
 **Channel** | Pointer to [**RegisterUserChannel**](RegisterUserChannel.md) |  | [optional] 
-**RegistrationReason** | **string** | reason for the user to register on the instance | 
 
 ## Methods
 
@@ -90,6 +90,26 @@ and a boolean to check if the value has been set.
 SetEmail sets Email field to given value.
 
 
+### GetRegistrationReason
+
+`func (o *UserRegistrationRequest) GetRegistrationReason() string`
+
+GetRegistrationReason returns the RegistrationReason field if non-nil, zero value otherwise.
+
+### GetRegistrationReasonOk
+
+`func (o *UserRegistrationRequest) GetRegistrationReasonOk() (*string, bool)`
+
+GetRegistrationReasonOk returns a tuple with the RegistrationReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegistrationReason
+
+`func (o *UserRegistrationRequest) SetRegistrationReason(v string)`
+
+SetRegistrationReason sets RegistrationReason field to given value.
+
+
 ### GetDisplayName
 
 `func (o *UserRegistrationRequest) GetDisplayName() string`
@@ -139,26 +159,6 @@ SetChannel sets Channel field to given value.
 `func (o *UserRegistrationRequest) HasChannel() bool`
 
 HasChannel returns a boolean if a field has been set.
-
-### GetRegistrationReason
-
-`func (o *UserRegistrationRequest) GetRegistrationReason() string`
-
-GetRegistrationReason returns the RegistrationReason field if non-nil, zero value otherwise.
-
-### GetRegistrationReasonOk
-
-`func (o *UserRegistrationRequest) GetRegistrationReasonOk() (*string, bool)`
-
-GetRegistrationReasonOk returns a tuple with the RegistrationReason field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRegistrationReason
-
-`func (o *UserRegistrationRequest) SetRegistrationReason(v string)`
-
-SetRegistrationReason sets RegistrationReason field to given value.
-
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

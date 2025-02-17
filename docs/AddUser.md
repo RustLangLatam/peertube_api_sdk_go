@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **Username** | **string** | immutable name of the user, used to find or mention its actor | 
 **Password** | **string** |  | 
 **Email** | **string** | The user email | 
+**Role** | [**UserRole**](UserRole.md) |  | 
 **VideoQuota** | Pointer to **int32** | The user video quota in bytes | [optional] 
 **VideoQuotaDaily** | Pointer to **int32** | The user daily video quota in bytes | [optional] 
 **ChannelName** | Pointer to **string** | immutable name of the channel, used to interact with its actor | [optional] 
-**Role** | [**UserRole**](UserRole.md) |  | 
 **AdminFlags** | Pointer to [**UserAdminFlags**](UserAdminFlags.md) |  | [optional] 
 
 ## Methods
@@ -92,6 +92,26 @@ and a boolean to check if the value has been set.
 SetEmail sets Email field to given value.
 
 
+### GetRole
+
+`func (o *AddUser) GetRole() UserRole`
+
+GetRole returns the Role field if non-nil, zero value otherwise.
+
+### GetRoleOk
+
+`func (o *AddUser) GetRoleOk() (*UserRole, bool)`
+
+GetRoleOk returns a tuple with the Role field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRole
+
+`func (o *AddUser) SetRole(v UserRole)`
+
+SetRole sets Role field to given value.
+
+
 ### GetVideoQuota
 
 `func (o *AddUser) GetVideoQuota() int32`
@@ -166,26 +186,6 @@ SetChannelName sets ChannelName field to given value.
 `func (o *AddUser) HasChannelName() bool`
 
 HasChannelName returns a boolean if a field has been set.
-
-### GetRole
-
-`func (o *AddUser) GetRole() UserRole`
-
-GetRole returns the Role field if non-nil, zero value otherwise.
-
-### GetRoleOk
-
-`func (o *AddUser) GetRoleOk() (*UserRole, bool)`
-
-GetRoleOk returns a tuple with the Role field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRole
-
-`func (o *AddUser) SetRole(v UserRole)`
-
-SetRole sets Role field to given value.
-
 
 ### GetAdminFlags
 
