@@ -3,23 +3,24 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/RustLangLatam/peertube_api_sdk_go/api"
+	"github.com/RustLangLatam/peertube_api_sdk_go/models"
+	"github.com/RustLangLatam/peertube_api_sdk_go/utils"
 	"log"
-
-	openapiclient "github.com/RustLangLatam/peertube_api_sdk"
 )
 
 func main() {
 	const baseUrl = "https://peertube.orderi.co"
 
 	// Initialize API client
-	config := openapiclient.NewConfigurationFromBaseURL(baseUrl)
+	config := api.NewConfigurationFromBaseURL(baseUrl)
 
-	apiClient := openapiclient.NewAPIClient(config)
+	apiClient := api.NewAPIClient(config)
 
-	id := openapiclient.PtrInt32(29)
+	id := utils.PtrInt32(29)
 
 	// Fetch a video by ID
-	videoID := openapiclient.Int32AsApiV1VideosOwnershipIdAcceptPostIdParameter(id)
+	videoID := models.Int32AsApiV1VideosOwnershipIdAcceptPostIdParameter(id)
 
 	video, _, err := apiClient.VideoAPI.GetVideo(context.Background(), videoID).Execute()
 	if err != nil {

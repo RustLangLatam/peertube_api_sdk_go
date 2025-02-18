@@ -3,21 +3,17 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/RustLangLatam/peertube_api_sdk_go/api"
 	"log"
-
-	openapiclient "github.com/RustLangLatam/peertube_api_sdk"
 )
 
 func main() {
 	baseUrl := "https://peertube.orderi.co"
 
-	config := openapiclient.NewConfiguration()
-	_, err := config.ServerURLWithContext(context.Background(), baseUrl)
-	if err != nil {
-		return
-	}
+	// Initialize API client
+	config := api.NewConfigurationFromBaseURL(baseUrl)
 
-	apiClient := openapiclient.NewAPIClient(config)
+	apiClient := api.NewAPIClient(config)
 
 	ctx := context.Background()
 	oauthClient, _, err := apiClient.SessionAPI.GetOAuthClient(ctx).Execute()
