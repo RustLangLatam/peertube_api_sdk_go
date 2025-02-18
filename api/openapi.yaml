@@ -20241,10 +20241,16 @@ components:
       properties:
         displayName:
           description: Channel display name
+          example: Videos of Framasoft
+          type: string
         description:
           description: Channel description
+          example: Videos made with <3 by Framasoft
+          type: string
         support:
           description: How to support/fund the channel
+          example: Please support our work on https://soutenir.framasoft.org/en/ <3
+          type: string
     VideoChannelCreate:
       allOf:
       - $ref: '#/components/schemas/VideoChannelEdit'
