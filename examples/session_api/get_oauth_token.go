@@ -11,7 +11,7 @@ func main() {
 	baseUrl := "https://peertube.orderi.co"
 
 	// Initialize API client
-	config := api.NewConfigurationFromBaseURL(baseUrl)
+	config := api.NewConfigurationFromBaseURL(baseUrl, true)
 
 	apiClient := api.NewAPIClient(config)
 
@@ -21,17 +21,18 @@ func main() {
 		log.Fatal(err)
 	}
 
-	oauthToken := apiClient.SessionAPI.GetOAuthToken(ctx).
+	oauthToken, _, err := apiClient.SessionAPI.GetOAuthToken(ctx).
 		ClientId(oauthClient.GetClientId()).
 		ClientSecret(oauthClient.GetClientSecret()).
 		Password("1ncC1hrpB9KD@peer").
 		Username("root").
-		GrantType("password")
+		GrantType("password").
+		Execute()
 
-	if response, _, err := oauthToken.Execute(); err != nil {
+	if err != nil {
 		log.Fatal(err)
-	} else {
-		videoMap, _ := response.MarshalJSON()
-		fmt.Printf("Video: %v\n", string(videoMap))
 	}
+
+	oauthTokenMap, _ := oauthToken.MarshalJSON()
+	fmt.Printf("OauthToken: %v\n", string(oauthTokenMap))
 }

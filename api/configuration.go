@@ -90,7 +90,7 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader: make(map[string]string),
-		UserAgent:     "OpenAPI-Generator/1.0.0/go",
+		UserAgent:     "Peertube API SDK/1.0.1/go",
 		Debug:         false,
 		Servers: ServerConfigurations{
 			{
@@ -111,12 +111,19 @@ func NewConfiguration() *Configuration {
 	return cfg
 }
 
-// NewConfigurationFromBaseURL creates a new Configuration object from a base URL node
-func NewConfigurationFromBaseURL(baseURL string) *Configuration {
+// NewConfigurationFromBaseURL creates a new Configuration object from a base URL node.
+// The debug parameter is optional and defaults to false.
+func NewConfigurationFromBaseURL(baseURL string, debug ...bool) *Configuration {
+	// Set debug to false by default
+	isDebug := false
+	if len(debug) > 0 {
+		isDebug = debug[0] // Use provided value if available
+	}
+
 	cfg := &Configuration{
 		DefaultHeader: make(map[string]string),
-		UserAgent:     "OpenAPI-Generator/1.0.0/go",
-		Debug:         false,
+		UserAgent:     "Peertube API SDK/1.0.1/go",
+		Debug:         isDebug,
 		Servers: ServerConfigurations{
 			{
 				URL:         baseURL,
@@ -125,6 +132,7 @@ func NewConfigurationFromBaseURL(baseURL string) *Configuration {
 		},
 		OperationServers: map[string]ServerConfigurations{},
 	}
+
 	return cfg
 }
 

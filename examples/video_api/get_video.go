@@ -13,7 +13,7 @@ func main() {
 	const baseUrl = "https://peertube.orderi.co"
 
 	// Initialize API client
-	config := api.NewConfigurationFromBaseURL(baseUrl)
+	config := api.NewConfigurationFromBaseURL(baseUrl, true)
 
 	apiClient := api.NewAPIClient(config)
 
