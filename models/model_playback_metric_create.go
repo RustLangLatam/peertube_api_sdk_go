@@ -23,9 +23,17 @@ var _ utils.MappedNullable = &PlaybackMetricCreate{}
 // PlaybackMetricCreate struct for PlaybackMetricCreate
 type PlaybackMetricCreate struct {
 	PlayerMode string `json:"playerMode"`
-	P2pEnabled bool   `json:"p2pEnabled"`
+	// Current player video resolution
+	Resolution *float32 `json:"resolution,omitempty"`
+	// Current player video fps
+	Fps        *float32 `json:"fps,omitempty"`
+	P2pEnabled bool     `json:"p2pEnabled"`
+	// P2P peers connected (doesn't include WebSeed peers)
+	P2pPeers *float32 `json:"p2pPeers,omitempty"`
 	// How many resolution changes occurred since the last metric creation
 	ResolutionChanges float32 `json:"resolutionChanges"`
+	// How many times buffer has been stalled since the last metric creation
+	BufferStalled *float32 `json:"bufferStalled,omitempty"`
 	// How many errors occurred since the last metric creation
 	Errors float32 `json:"errors"`
 	// How many bytes were downloaded with P2P since the last metric creation
@@ -35,14 +43,6 @@ type PlaybackMetricCreate struct {
 	// How many bytes were uploaded with P2P since the last metric creation
 	UploadedBytesP2P float32                                     `json:"uploadedBytesP2P"`
 	VideoId          ApiV1VideosOwnershipIdAcceptPostIdParameter `json:"videoId"`
-	// Current player video resolution
-	Resolution *float32 `json:"resolution,omitempty"`
-	// Current player video fps
-	Fps *float32 `json:"fps,omitempty"`
-	// P2P peers connected (doesn't include WebSeed peers)
-	P2pPeers *float32 `json:"p2pPeers,omitempty"`
-	// How many times buffer has been stalled since the last metric creation
-	BufferStalled *float32 `json:"bufferStalled,omitempty"`
 }
 
 type _PlaybackMetricCreate PlaybackMetricCreate
@@ -96,6 +96,70 @@ func (o *PlaybackMetricCreate) SetPlayerMode(v string) {
 	o.PlayerMode = v
 }
 
+// GetResolution returns the Resolution field value if set, zero value otherwise.
+func (o *PlaybackMetricCreate) GetResolution() float32 {
+	if o == nil || utils.IsNil(o.Resolution) {
+		var ret float32
+		return ret
+	}
+	return *o.Resolution
+}
+
+// GetResolutionOk returns a tuple with the Resolution field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlaybackMetricCreate) GetResolutionOk() (*float32, bool) {
+	if o == nil || utils.IsNil(o.Resolution) {
+		return nil, false
+	}
+	return o.Resolution, true
+}
+
+// HasResolution returns a boolean if a field has been set.
+func (o *PlaybackMetricCreate) HasResolution() bool {
+	if o != nil && !utils.IsNil(o.Resolution) {
+		return true
+	}
+
+	return false
+}
+
+// SetResolution gets a reference to the given float32 and assigns it to the Resolution field.
+func (o *PlaybackMetricCreate) SetResolution(v float32) {
+	o.Resolution = &v
+}
+
+// GetFps returns the Fps field value if set, zero value otherwise.
+func (o *PlaybackMetricCreate) GetFps() float32 {
+	if o == nil || utils.IsNil(o.Fps) {
+		var ret float32
+		return ret
+	}
+	return *o.Fps
+}
+
+// GetFpsOk returns a tuple with the Fps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlaybackMetricCreate) GetFpsOk() (*float32, bool) {
+	if o == nil || utils.IsNil(o.Fps) {
+		return nil, false
+	}
+	return o.Fps, true
+}
+
+// HasFps returns a boolean if a field has been set.
+func (o *PlaybackMetricCreate) HasFps() bool {
+	if o != nil && !utils.IsNil(o.Fps) {
+		return true
+	}
+
+	return false
+}
+
+// SetFps gets a reference to the given float32 and assigns it to the Fps field.
+func (o *PlaybackMetricCreate) SetFps(v float32) {
+	o.Fps = &v
+}
+
 // GetP2pEnabled returns the P2pEnabled field value
 func (o *PlaybackMetricCreate) GetP2pEnabled() bool {
 	if o == nil {
@@ -120,6 +184,38 @@ func (o *PlaybackMetricCreate) SetP2pEnabled(v bool) {
 	o.P2pEnabled = v
 }
 
+// GetP2pPeers returns the P2pPeers field value if set, zero value otherwise.
+func (o *PlaybackMetricCreate) GetP2pPeers() float32 {
+	if o == nil || utils.IsNil(o.P2pPeers) {
+		var ret float32
+		return ret
+	}
+	return *o.P2pPeers
+}
+
+// GetP2pPeersOk returns a tuple with the P2pPeers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlaybackMetricCreate) GetP2pPeersOk() (*float32, bool) {
+	if o == nil || utils.IsNil(o.P2pPeers) {
+		return nil, false
+	}
+	return o.P2pPeers, true
+}
+
+// HasP2pPeers returns a boolean if a field has been set.
+func (o *PlaybackMetricCreate) HasP2pPeers() bool {
+	if o != nil && !utils.IsNil(o.P2pPeers) {
+		return true
+	}
+
+	return false
+}
+
+// SetP2pPeers gets a reference to the given float32 and assigns it to the P2pPeers field.
+func (o *PlaybackMetricCreate) SetP2pPeers(v float32) {
+	o.P2pPeers = &v
+}
+
 // GetResolutionChanges returns the ResolutionChanges field value
 func (o *PlaybackMetricCreate) GetResolutionChanges() float32 {
 	if o == nil {
@@ -142,6 +238,38 @@ func (o *PlaybackMetricCreate) GetResolutionChangesOk() (*float32, bool) {
 // SetResolutionChanges sets field value
 func (o *PlaybackMetricCreate) SetResolutionChanges(v float32) {
 	o.ResolutionChanges = v
+}
+
+// GetBufferStalled returns the BufferStalled field value if set, zero value otherwise.
+func (o *PlaybackMetricCreate) GetBufferStalled() float32 {
+	if o == nil || utils.IsNil(o.BufferStalled) {
+		var ret float32
+		return ret
+	}
+	return *o.BufferStalled
+}
+
+// GetBufferStalledOk returns a tuple with the BufferStalled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlaybackMetricCreate) GetBufferStalledOk() (*float32, bool) {
+	if o == nil || utils.IsNil(o.BufferStalled) {
+		return nil, false
+	}
+	return o.BufferStalled, true
+}
+
+// HasBufferStalled returns a boolean if a field has been set.
+func (o *PlaybackMetricCreate) HasBufferStalled() bool {
+	if o != nil && !utils.IsNil(o.BufferStalled) {
+		return true
+	}
+
+	return false
+}
+
+// SetBufferStalled gets a reference to the given float32 and assigns it to the BufferStalled field.
+func (o *PlaybackMetricCreate) SetBufferStalled(v float32) {
+	o.BufferStalled = &v
 }
 
 // GetErrors returns the Errors field value
@@ -264,134 +392,6 @@ func (o *PlaybackMetricCreate) SetVideoId(v ApiV1VideosOwnershipIdAcceptPostIdPa
 	o.VideoId = v
 }
 
-// GetResolution returns the Resolution field value if set, zero value otherwise.
-func (o *PlaybackMetricCreate) GetResolution() float32 {
-	if o == nil || utils.IsNil(o.Resolution) {
-		var ret float32
-		return ret
-	}
-	return *o.Resolution
-}
-
-// GetResolutionOk returns a tuple with the Resolution field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PlaybackMetricCreate) GetResolutionOk() (*float32, bool) {
-	if o == nil || utils.IsNil(o.Resolution) {
-		return nil, false
-	}
-	return o.Resolution, true
-}
-
-// HasResolution returns a boolean if a field has been set.
-func (o *PlaybackMetricCreate) HasResolution() bool {
-	if o != nil && !utils.IsNil(o.Resolution) {
-		return true
-	}
-
-	return false
-}
-
-// SetResolution gets a reference to the given float32 and assigns it to the Resolution field.
-func (o *PlaybackMetricCreate) SetResolution(v float32) {
-	o.Resolution = &v
-}
-
-// GetFps returns the Fps field value if set, zero value otherwise.
-func (o *PlaybackMetricCreate) GetFps() float32 {
-	if o == nil || utils.IsNil(o.Fps) {
-		var ret float32
-		return ret
-	}
-	return *o.Fps
-}
-
-// GetFpsOk returns a tuple with the Fps field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PlaybackMetricCreate) GetFpsOk() (*float32, bool) {
-	if o == nil || utils.IsNil(o.Fps) {
-		return nil, false
-	}
-	return o.Fps, true
-}
-
-// HasFps returns a boolean if a field has been set.
-func (o *PlaybackMetricCreate) HasFps() bool {
-	if o != nil && !utils.IsNil(o.Fps) {
-		return true
-	}
-
-	return false
-}
-
-// SetFps gets a reference to the given float32 and assigns it to the Fps field.
-func (o *PlaybackMetricCreate) SetFps(v float32) {
-	o.Fps = &v
-}
-
-// GetP2pPeers returns the P2pPeers field value if set, zero value otherwise.
-func (o *PlaybackMetricCreate) GetP2pPeers() float32 {
-	if o == nil || utils.IsNil(o.P2pPeers) {
-		var ret float32
-		return ret
-	}
-	return *o.P2pPeers
-}
-
-// GetP2pPeersOk returns a tuple with the P2pPeers field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PlaybackMetricCreate) GetP2pPeersOk() (*float32, bool) {
-	if o == nil || utils.IsNil(o.P2pPeers) {
-		return nil, false
-	}
-	return o.P2pPeers, true
-}
-
-// HasP2pPeers returns a boolean if a field has been set.
-func (o *PlaybackMetricCreate) HasP2pPeers() bool {
-	if o != nil && !utils.IsNil(o.P2pPeers) {
-		return true
-	}
-
-	return false
-}
-
-// SetP2pPeers gets a reference to the given float32 and assigns it to the P2pPeers field.
-func (o *PlaybackMetricCreate) SetP2pPeers(v float32) {
-	o.P2pPeers = &v
-}
-
-// GetBufferStalled returns the BufferStalled field value if set, zero value otherwise.
-func (o *PlaybackMetricCreate) GetBufferStalled() float32 {
-	if o == nil || utils.IsNil(o.BufferStalled) {
-		var ret float32
-		return ret
-	}
-	return *o.BufferStalled
-}
-
-// GetBufferStalledOk returns a tuple with the BufferStalled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PlaybackMetricCreate) GetBufferStalledOk() (*float32, bool) {
-	if o == nil || utils.IsNil(o.BufferStalled) {
-		return nil, false
-	}
-	return o.BufferStalled, true
-}
-
-// HasBufferStalled returns a boolean if a field has been set.
-func (o *PlaybackMetricCreate) HasBufferStalled() bool {
-	if o != nil && !utils.IsNil(o.BufferStalled) {
-		return true
-	}
-
-	return false
-}
-
-// SetBufferStalled gets a reference to the given float32 and assigns it to the BufferStalled field.
-func (o *PlaybackMetricCreate) SetBufferStalled(v float32) {
-	o.BufferStalled = &v
-}
-
 func (o PlaybackMetricCreate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -403,25 +403,25 @@ func (o PlaybackMetricCreate) MarshalJSON() ([]byte, error) {
 func (o PlaybackMetricCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["playerMode"] = o.PlayerMode
-	toSerialize["p2pEnabled"] = o.P2pEnabled
-	toSerialize["resolutionChanges"] = o.ResolutionChanges
-	toSerialize["errors"] = o.Errors
-	toSerialize["downloadedBytesP2P"] = o.DownloadedBytesP2P
-	toSerialize["downloadedBytesHTTP"] = o.DownloadedBytesHTTP
-	toSerialize["uploadedBytesP2P"] = o.UploadedBytesP2P
-	toSerialize["videoId"] = o.VideoId
 	if !utils.IsNil(o.Resolution) {
 		toSerialize["resolution"] = o.Resolution
 	}
 	if !utils.IsNil(o.Fps) {
 		toSerialize["fps"] = o.Fps
 	}
+	toSerialize["p2pEnabled"] = o.P2pEnabled
 	if !utils.IsNil(o.P2pPeers) {
 		toSerialize["p2pPeers"] = o.P2pPeers
 	}
+	toSerialize["resolutionChanges"] = o.ResolutionChanges
 	if !utils.IsNil(o.BufferStalled) {
 		toSerialize["bufferStalled"] = o.BufferStalled
 	}
+	toSerialize["errors"] = o.Errors
+	toSerialize["downloadedBytesP2P"] = o.DownloadedBytesP2P
+	toSerialize["downloadedBytesHTTP"] = o.DownloadedBytesHTTP
+	toSerialize["uploadedBytesP2P"] = o.UploadedBytesP2P
+	toSerialize["videoId"] = o.VideoId
 	return toSerialize, nil
 }
 

@@ -27,10 +27,8 @@ type VideoUploadRequestResumable struct {
 	// Video name
 	Name string `json:"name"`
 	// Channel id that will contain this video
-	ChannelId int32 `json:"channelId"`
-	// Video filename including extension
-	Filename string           `json:"filename"`
-	Privacy  *VideoPrivacySet `json:"privacy,omitempty"`
+	ChannelId int32            `json:"channelId"`
+	Privacy   *VideoPrivacySet `json:"privacy,omitempty"`
 	// category id of the video (see [/videos/categories](#operation/getCategories))
 	Category *int32 `json:"category,omitempty"`
 	// licence id of the video (see [/videos/licences](#operation/getLicences))
@@ -63,6 +61,8 @@ type VideoUploadRequestResumable struct {
 	// Video preview file
 	Previewfile    **os.File `json:"previewfile,omitempty"`
 	VideoPasswords []string  `json:"videoPasswords,omitempty"`
+	// Video filename including extension
+	Filename string `json:"filename"`
 }
 
 type _VideoUploadRequestResumable VideoUploadRequestResumable
@@ -133,30 +133,6 @@ func (o *VideoUploadRequestResumable) GetChannelIdOk() (*int32, bool) {
 // SetChannelId sets field value
 func (o *VideoUploadRequestResumable) SetChannelId(v int32) {
 	o.ChannelId = v
-}
-
-// GetFilename returns the Filename field value
-func (o *VideoUploadRequestResumable) GetFilename() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Filename
-}
-
-// GetFilenameOk returns a tuple with the Filename field value
-// and a boolean to check if the value has been set.
-func (o *VideoUploadRequestResumable) GetFilenameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Filename, true
-}
-
-// SetFilename sets field value
-func (o *VideoUploadRequestResumable) SetFilename(v string) {
-	o.Filename = v
 }
 
 // GetPrivacy returns the Privacy field value if set, zero value otherwise.
@@ -738,6 +714,30 @@ func (o *VideoUploadRequestResumable) SetVideoPasswords(v []string) {
 	o.VideoPasswords = v
 }
 
+// GetFilename returns the Filename field value
+func (o *VideoUploadRequestResumable) GetFilename() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Filename
+}
+
+// GetFilenameOk returns a tuple with the Filename field value
+// and a boolean to check if the value has been set.
+func (o *VideoUploadRequestResumable) GetFilenameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Filename, true
+}
+
+// SetFilename sets field value
+func (o *VideoUploadRequestResumable) SetFilename(v string) {
+	o.Filename = v
+}
+
 func (o VideoUploadRequestResumable) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -750,7 +750,6 @@ func (o VideoUploadRequestResumable) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["channelId"] = o.ChannelId
-	toSerialize["filename"] = o.Filename
 	if !utils.IsNil(o.Privacy) {
 		toSerialize["privacy"] = o.Privacy
 	}
@@ -805,6 +804,7 @@ func (o VideoUploadRequestResumable) ToMap() (map[string]interface{}, error) {
 	if !utils.IsNil(o.VideoPasswords) {
 		toSerialize["videoPasswords"] = o.VideoPasswords
 	}
+	toSerialize["filename"] = o.Filename
 	return toSerialize, nil
 }
 

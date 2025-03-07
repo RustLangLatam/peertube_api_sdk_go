@@ -326,8 +326,8 @@ func (a *AbusesAPIService) ApiV1AbusesAbuseIdMessagesGetExecute(r ApiApiV1Abuses
 type ApiApiV1AbusesAbuseIdMessagesPostRequest struct {
 	ctx                                   context.Context
 	ApiService                            *AbusesAPIService
-	apiV1AbusesAbuseIdMessagesPostRequest *models.ApiV1AbusesAbuseIdMessagesPostRequest
 	abuseId                               int32
+	apiV1AbusesAbuseIdMessagesPostRequest *models.ApiV1AbusesAbuseIdMessagesPostRequest
 }
 
 func (r ApiApiV1AbusesAbuseIdMessagesPostRequest) ApiV1AbusesAbuseIdMessagesPostRequest(apiV1AbusesAbuseIdMessagesPostRequest models.ApiV1AbusesAbuseIdMessagesPostRequest) ApiApiV1AbusesAbuseIdMessagesPostRequest {
@@ -373,11 +373,11 @@ func (a *AbusesAPIService) ApiV1AbusesAbuseIdMessagesPostExecute(r ApiApiV1Abuse
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.apiV1AbusesAbuseIdMessagesPostRequest == nil {
-		return nil, utils.ReportError("apiV1AbusesAbuseIdMessagesPostRequest is required and must be specified")
-	}
 	if r.abuseId < 1 {
 		return nil, utils.ReportError("abuseId must be greater than 1")
+	}
+	if r.apiV1AbusesAbuseIdMessagesPostRequest == nil {
+		return nil, utils.ReportError("apiV1AbusesAbuseIdMessagesPostRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header

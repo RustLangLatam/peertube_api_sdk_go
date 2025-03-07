@@ -17,7 +17,6 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
-	"github.com/RustLangLatam/peertube_api_sdk_go/models"
 	"github.com/RustLangLatam/peertube_api_sdk_go/utils"
 	"io"
 	"log"
@@ -269,45 +268,23 @@ func typeCheckParameter(obj interface{}, expected string, name string) error {
 	return nil
 }
 
-// parameterValueToString convierte obj en un string, manejando múltiples tipos de entrada
 func parameterValueToString(obj interface{}, key string) string {
-	if obj == nil {
+	if reflect.TypeOf(obj).Kind() != reflect.Ptr {
+		if actualObj, ok := obj.(interface{ GetActualInstanceValue() interface{} }); ok {
+			return fmt.Sprintf("%v", actualObj.GetActualInstanceValue())
+		}
+
+		return fmt.Sprintf("%v", obj)
+	}
+	var param, ok = obj.(utils.MappedNullable)
+	if !ok {
 		return ""
 	}
-
-	// Si obj es un puntero, obtenemos su valor
-	val := reflect.ValueOf(obj)
-	if val.Kind() == reflect.Ptr {
-		if val.IsNil() {
-			return ""
-		}
-		val = val.Elem() // Desreferenciamos el puntero
-	}
-
-	// Caso especial: si es ApiV1VideosOwnershipIdAcceptPostIdParameter
-	if param, ok := val.Interface().(models.ApiV1VideosOwnershipIdAcceptPostIdParameter); ok {
-		if param.Int32 != nil {
-			return strconv.Itoa(int(*param.Int32)) // Convertimos int32 a string
-		}
-		if param.String != nil {
-			return *param.String
-		}
+	dataMap, err := param.ToMap()
+	if err != nil {
 		return ""
 	}
-
-	// Si obj implementa MappedNullable, intentamos extraer su valor con ToMap()
-	if param, ok := obj.(utils.MappedNullable); ok {
-		dataMap, err := param.ToMap()
-		if err != nil {
-			return ""
-		}
-		if value, exists := dataMap[key]; exists {
-			return fmt.Sprintf("%v", value)
-		}
-	}
-
-	// Si no es ninguno de los anteriores, convertir a string genéricamente
-	return fmt.Sprintf("%v", obj)
+	return fmt.Sprintf("%v", dataMap[key])
 }
 
 // parameterAddToHeaderOrQuery adds the provided object to the request header or url query

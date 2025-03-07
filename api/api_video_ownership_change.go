@@ -27,8 +27,8 @@ type VideoOwnershipChangeAPIService service
 type ApiApiV1VideosIdGiveOwnershipPostRequest struct {
 	ctx        context.Context
 	ApiService *VideoOwnershipChangeAPIService
-	username   *string
 	id         models.ApiV1VideosOwnershipIdAcceptPostIdParameter
+	username   *string
 }
 
 func (r ApiApiV1VideosIdGiveOwnershipPostRequest) Username(username string) ApiApiV1VideosIdGiveOwnershipPostRequest {

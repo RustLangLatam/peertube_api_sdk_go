@@ -26,14 +26,14 @@ type AddUser struct {
 	Username string `json:"username" validate:"regexp=^[a-z0-9._]+$"`
 	Password string `json:"password"`
 	// The user email
-	Email string   `json:"email"`
-	Role  UserRole `json:"role"`
+	Email string `json:"email"`
 	// The user video quota in bytes
 	VideoQuota *int32 `json:"videoQuota,omitempty"`
 	// The user daily video quota in bytes
 	VideoQuotaDaily *int32 `json:"videoQuotaDaily,omitempty"`
 	// immutable name of the channel, used to interact with its actor
 	ChannelName *string         `json:"channelName,omitempty" validate:"regexp=^[a-zA-Z0-9\\\\\\\\-_.:]+$"`
+	Role        UserRole        `json:"role"`
 	AdminFlags  *UserAdminFlags `json:"adminFlags,omitempty"`
 }
 
@@ -132,30 +132,6 @@ func (o *AddUser) SetEmail(v string) {
 	o.Email = v
 }
 
-// GetRole returns the Role field value
-func (o *AddUser) GetRole() UserRole {
-	if o == nil {
-		var ret UserRole
-		return ret
-	}
-
-	return o.Role
-}
-
-// GetRoleOk returns a tuple with the Role field value
-// and a boolean to check if the value has been set.
-func (o *AddUser) GetRoleOk() (*UserRole, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Role, true
-}
-
-// SetRole sets field value
-func (o *AddUser) SetRole(v UserRole) {
-	o.Role = v
-}
-
 // GetVideoQuota returns the VideoQuota field value if set, zero value otherwise.
 func (o *AddUser) GetVideoQuota() int32 {
 	if o == nil || utils.IsNil(o.VideoQuota) {
@@ -252,6 +228,30 @@ func (o *AddUser) SetChannelName(v string) {
 	o.ChannelName = &v
 }
 
+// GetRole returns the Role field value
+func (o *AddUser) GetRole() UserRole {
+	if o == nil {
+		var ret UserRole
+		return ret
+	}
+
+	return o.Role
+}
+
+// GetRoleOk returns a tuple with the Role field value
+// and a boolean to check if the value has been set.
+func (o *AddUser) GetRoleOk() (*UserRole, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Role, true
+}
+
+// SetRole sets field value
+func (o *AddUser) SetRole(v UserRole) {
+	o.Role = v
+}
+
 // GetAdminFlags returns the AdminFlags field value if set, zero value otherwise.
 func (o *AddUser) GetAdminFlags() UserAdminFlags {
 	if o == nil || utils.IsNil(o.AdminFlags) {
@@ -297,7 +297,6 @@ func (o AddUser) ToMap() (map[string]interface{}, error) {
 	toSerialize["username"] = o.Username
 	toSerialize["password"] = o.Password
 	toSerialize["email"] = o.Email
-	toSerialize["role"] = o.Role
 	if !utils.IsNil(o.VideoQuota) {
 		toSerialize["videoQuota"] = o.VideoQuota
 	}
@@ -307,6 +306,7 @@ func (o AddUser) ToMap() (map[string]interface{}, error) {
 	if !utils.IsNil(o.ChannelName) {
 		toSerialize["channelName"] = o.ChannelName
 	}
+	toSerialize["role"] = o.Role
 	if !utils.IsNil(o.AdminFlags) {
 		toSerialize["adminFlags"] = o.AdminFlags
 	}

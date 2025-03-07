@@ -13,8 +13,6 @@ package models
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/RustLangLatam/peertube_api_sdk_go/utils"
-	"gopkg.in/validator.v2"
 )
 
 // AddPluginRequest - struct for AddPluginRequest
@@ -42,34 +40,26 @@ func (dst *AddPluginRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into AddPluginRequestOneOf
-	err = utils.NewStrictDecoder(data).Decode(&dst.AddPluginRequestOneOf)
+	err = json.Unmarshal(data, &dst.AddPluginRequestOneOf)
 	if err == nil {
 		jsonAddPluginRequestOneOf, _ := json.Marshal(dst.AddPluginRequestOneOf)
 		if string(jsonAddPluginRequestOneOf) == "{}" { // empty struct
 			dst.AddPluginRequestOneOf = nil
 		} else {
-			if err = validator.Validate(dst.AddPluginRequestOneOf); err != nil {
-				dst.AddPluginRequestOneOf = nil
-			} else {
-				match++
-			}
+			match++
 		}
 	} else {
 		dst.AddPluginRequestOneOf = nil
 	}
 
 	// try to unmarshal data into AddPluginRequestOneOf1
-	err = utils.NewStrictDecoder(data).Decode(&dst.AddPluginRequestOneOf1)
+	err = json.Unmarshal(data, &dst.AddPluginRequestOneOf1)
 	if err == nil {
 		jsonAddPluginRequestOneOf1, _ := json.Marshal(dst.AddPluginRequestOneOf1)
 		if string(jsonAddPluginRequestOneOf1) == "{}" { // empty struct
 			dst.AddPluginRequestOneOf1 = nil
 		} else {
-			if err = validator.Validate(dst.AddPluginRequestOneOf1); err != nil {
-				dst.AddPluginRequestOneOf1 = nil
-			} else {
-				match++
-			}
+			match++
 		}
 	} else {
 		dst.AddPluginRequestOneOf1 = nil
@@ -112,6 +102,20 @@ func (obj *AddPluginRequest) GetActualInstance() interface{} {
 
 	if obj.AddPluginRequestOneOf1 != nil {
 		return obj.AddPluginRequestOneOf1
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj AddPluginRequest) GetActualInstanceValue() interface{} {
+	if obj.AddPluginRequestOneOf != nil {
+		return *obj.AddPluginRequestOneOf
+	}
+
+	if obj.AddPluginRequestOneOf1 != nil {
+		return *obj.AddPluginRequestOneOf1
 	}
 
 	// all schemas are nil

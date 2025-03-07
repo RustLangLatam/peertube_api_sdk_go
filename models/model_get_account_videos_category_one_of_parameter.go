@@ -13,8 +13,6 @@ package models
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/RustLangLatam/peertube_api_sdk_go/utils"
-	"gopkg.in/validator.v2"
 )
 
 // GetAccountVideosCategoryOneOfParameter - struct for GetAccountVideosCategoryOneOfParameter
@@ -42,34 +40,26 @@ func (dst *GetAccountVideosCategoryOneOfParameter) UnmarshalJSON(data []byte) er
 	var err error
 	match := 0
 	// try to unmarshal data into ArrayOfInt32
-	err = utils.NewStrictDecoder(data).Decode(&dst.ArrayOfInt32)
+	err = json.Unmarshal(data, &dst.ArrayOfInt32)
 	if err == nil {
 		jsonArrayOfInt32, _ := json.Marshal(dst.ArrayOfInt32)
 		if string(jsonArrayOfInt32) == "{}" { // empty struct
 			dst.ArrayOfInt32 = nil
 		} else {
-			if err = validator.Validate(dst.ArrayOfInt32); err != nil {
-				dst.ArrayOfInt32 = nil
-			} else {
-				match++
-			}
+			match++
 		}
 	} else {
 		dst.ArrayOfInt32 = nil
 	}
 
 	// try to unmarshal data into Int32
-	err = utils.NewStrictDecoder(data).Decode(&dst.Int32)
+	err = json.Unmarshal(data, &dst.Int32)
 	if err == nil {
 		jsonInt32, _ := json.Marshal(dst.Int32)
 		if string(jsonInt32) == "{}" { // empty struct
 			dst.Int32 = nil
 		} else {
-			if err = validator.Validate(dst.Int32); err != nil {
-				dst.Int32 = nil
-			} else {
-				match++
-			}
+			match++
 		}
 	} else {
 		dst.Int32 = nil
@@ -112,6 +102,20 @@ func (obj *GetAccountVideosCategoryOneOfParameter) GetActualInstance() interface
 
 	if obj.Int32 != nil {
 		return obj.Int32
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj GetAccountVideosCategoryOneOfParameter) GetActualInstanceValue() interface{} {
+	if obj.ArrayOfInt32 != nil {
+		return *obj.ArrayOfInt32
+	}
+
+	if obj.Int32 != nil {
+		return *obj.Int32
 	}
 
 	// all schemas are nil

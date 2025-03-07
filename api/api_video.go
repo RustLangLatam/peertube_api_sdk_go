@@ -29,8 +29,8 @@ type VideoAPIService service
 type ApiAddViewRequest struct {
 	ctx              context.Context
 	ApiService       *VideoAPIService
-	userViewingVideo *models.UserViewingVideo
 	id               models.ApiV1VideosOwnershipIdAcceptPostIdParameter
+	userViewingVideo *models.UserViewingVideo
 }
 
 func (r ApiAddViewRequest) UserViewingVideo(userViewingVideo models.UserViewingVideo) ApiAddViewRequest {
@@ -224,8 +224,8 @@ func (a *VideoAPIService) ApiV1VideosIdStudioEditPostExecute(r ApiApiV1VideosIdS
 type ApiApiV1VideosIdWatchingPutRequest struct {
 	ctx              context.Context
 	ApiService       *VideoAPIService
-	userViewingVideo *models.UserViewingVideo
 	id               models.ApiV1VideosOwnershipIdAcceptPostIdParameter
+	userViewingVideo *models.UserViewingVideo
 }
 
 func (r ApiApiV1VideosIdWatchingPutRequest) UserViewingVideo(userViewingVideo models.UserViewingVideo) ApiApiV1VideosIdWatchingPutRequest {
@@ -512,7 +512,7 @@ type ApiGetCategoriesRequest struct {
 	ApiService *VideoAPIService
 }
 
-func (r ApiGetCategoriesRequest) Execute() ([]string, *http.Response, error) {
+func (r ApiGetCategoriesRequest) Execute() (map[string]string, *http.Response, error) {
 	return r.ApiService.GetCategoriesExecute(r)
 }
 
@@ -531,13 +531,13 @@ func (a *VideoAPIService) GetCategories(ctx context.Context) ApiGetCategoriesReq
 
 // Execute executes the request
 //
-//	@return []string
-func (a *VideoAPIService) GetCategoriesExecute(r ApiGetCategoriesRequest) ([]string, *http.Response, error) {
+//	@return map[string]string
+func (a *VideoAPIService) GetCategoriesExecute(r ApiGetCategoriesRequest) (map[string]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []string
+		localVarReturnValue map[string]string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VideoAPIService.GetCategories")
@@ -708,7 +708,7 @@ type ApiGetLicencesRequest struct {
 	ApiService *VideoAPIService
 }
 
-func (r ApiGetLicencesRequest) Execute() ([]string, *http.Response, error) {
+func (r ApiGetLicencesRequest) Execute() (map[string]string, *http.Response, error) {
 	return r.ApiService.GetLicencesExecute(r)
 }
 
@@ -727,13 +727,13 @@ func (a *VideoAPIService) GetLicences(ctx context.Context) ApiGetLicencesRequest
 
 // Execute executes the request
 //
-//	@return []string
-func (a *VideoAPIService) GetLicencesExecute(r ApiGetLicencesRequest) ([]string, *http.Response, error) {
+//	@return map[string]string
+func (a *VideoAPIService) GetLicencesExecute(r ApiGetLicencesRequest) (map[string]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []string
+		localVarReturnValue map[string]string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VideoAPIService.GetLicences")
@@ -850,7 +850,7 @@ func (a *VideoAPIService) GetVideoExecute(r ApiGetVideoRequest) (*models.VideoDe
 	}
 
 	localVarPath := localBasePath + "/api/v1/videos/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(&r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

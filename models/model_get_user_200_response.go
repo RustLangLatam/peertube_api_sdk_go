@@ -13,8 +13,6 @@ package models
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/RustLangLatam/peertube_api_sdk_go/utils"
-	"gopkg.in/validator.v2"
 )
 
 // GetUser200Response - struct for GetUser200Response
@@ -42,34 +40,26 @@ func (dst *GetUser200Response) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into User
-	err = utils.NewStrictDecoder(data).Decode(&dst.User)
+	err = json.Unmarshal(data, &dst.User)
 	if err == nil {
 		jsonUser, _ := json.Marshal(dst.User)
 		if string(jsonUser) == "{}" { // empty struct
 			dst.User = nil
 		} else {
-			if err = validator.Validate(dst.User); err != nil {
-				dst.User = nil
-			} else {
-				match++
-			}
+			match++
 		}
 	} else {
 		dst.User = nil
 	}
 
 	// try to unmarshal data into UserWithStats
-	err = utils.NewStrictDecoder(data).Decode(&dst.UserWithStats)
+	err = json.Unmarshal(data, &dst.UserWithStats)
 	if err == nil {
 		jsonUserWithStats, _ := json.Marshal(dst.UserWithStats)
 		if string(jsonUserWithStats) == "{}" { // empty struct
 			dst.UserWithStats = nil
 		} else {
-			if err = validator.Validate(dst.UserWithStats); err != nil {
-				dst.UserWithStats = nil
-			} else {
-				match++
-			}
+			match++
 		}
 	} else {
 		dst.UserWithStats = nil
@@ -112,6 +102,20 @@ func (obj *GetUser200Response) GetActualInstance() interface{} {
 
 	if obj.UserWithStats != nil {
 		return obj.UserWithStats
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj GetUser200Response) GetActualInstanceValue() interface{} {
+	if obj.User != nil {
+		return *obj.User
+	}
+
+	if obj.UserWithStats != nil {
+		return *obj.UserWithStats
 	}
 
 	// all schemas are nil

@@ -23,13 +23,13 @@ var _ utils.MappedNullable = &VideoChannelCreate{}
 // VideoChannelCreate struct for VideoChannelCreate
 type VideoChannelCreate struct {
 	// Channel display name
-	DisplayName interface{} `json:"displayName"`
+	DisplayName string `json:"displayName"`
+	// Channel description
+	Description *string `json:"description,omitempty"`
+	// How to support/fund the channel
+	Support *string `json:"support,omitempty"`
 	// username of the channel to create
 	Name string `json:"name" validate:"regexp=^[a-zA-Z0-9\\\\\\\\-_.:]+$"`
-	// Channel description
-	Description interface{} `json:"description,omitempty"`
-	// How to support/fund the channel
-	Support interface{} `json:"support,omitempty"`
 }
 
 type _VideoChannelCreate VideoChannelCreate
@@ -38,7 +38,7 @@ type _VideoChannelCreate VideoChannelCreate
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVideoChannelCreate(displayName interface{}, name string) *VideoChannelCreate {
+func NewVideoChannelCreate(displayName string, name string) *VideoChannelCreate {
 	this := VideoChannelCreate{}
 	this.DisplayName = displayName
 	this.Name = name
@@ -54,10 +54,9 @@ func NewVideoChannelCreateWithDefaults() *VideoChannelCreate {
 }
 
 // GetDisplayName returns the DisplayName field value
-// If the value is explicit nil, the zero value for interface{} will be returned
-func (o *VideoChannelCreate) GetDisplayName() interface{} {
+func (o *VideoChannelCreate) GetDisplayName() string {
 	if o == nil {
-		var ret interface{}
+		var ret string
 		return ret
 	}
 
@@ -66,17 +65,80 @@ func (o *VideoChannelCreate) GetDisplayName() interface{} {
 
 // GetDisplayNameOk returns a tuple with the DisplayName field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VideoChannelCreate) GetDisplayNameOk() (*interface{}, bool) {
-	if o == nil || utils.IsNil(o.DisplayName) {
+func (o *VideoChannelCreate) GetDisplayNameOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return &o.DisplayName, true
 }
 
 // SetDisplayName sets field value
-func (o *VideoChannelCreate) SetDisplayName(v interface{}) {
+func (o *VideoChannelCreate) SetDisplayName(v string) {
 	o.DisplayName = v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *VideoChannelCreate) GetDescription() string {
+	if o == nil || utils.IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VideoChannelCreate) GetDescriptionOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *VideoChannelCreate) HasDescription() bool {
+	if o != nil && !utils.IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *VideoChannelCreate) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetSupport returns the Support field value if set, zero value otherwise.
+func (o *VideoChannelCreate) GetSupport() string {
+	if o == nil || utils.IsNil(o.Support) {
+		var ret string
+		return ret
+	}
+	return *o.Support
+}
+
+// GetSupportOk returns a tuple with the Support field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VideoChannelCreate) GetSupportOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.Support) {
+		return nil, false
+	}
+	return o.Support, true
+}
+
+// HasSupport returns a boolean if a field has been set.
+func (o *VideoChannelCreate) HasSupport() bool {
+	if o != nil && !utils.IsNil(o.Support) {
+		return true
+	}
+
+	return false
+}
+
+// SetSupport gets a reference to the given string and assigns it to the Support field.
+func (o *VideoChannelCreate) SetSupport(v string) {
+	o.Support = &v
 }
 
 // GetName returns the Name field value
@@ -103,72 +165,6 @@ func (o *VideoChannelCreate) SetName(v string) {
 	o.Name = v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *VideoChannelCreate) GetDescription() interface{} {
-	if o == nil {
-		var ret interface{}
-		return ret
-	}
-	return o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VideoChannelCreate) GetDescriptionOk() (*interface{}, bool) {
-	if o == nil || utils.IsNil(o.Description) {
-		return nil, false
-	}
-	return &o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *VideoChannelCreate) HasDescription() bool {
-	if o != nil && !utils.IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given interface{} and assigns it to the Description field.
-func (o *VideoChannelCreate) SetDescription(v interface{}) {
-	o.Description = v
-}
-
-// GetSupport returns the Support field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *VideoChannelCreate) GetSupport() interface{} {
-	if o == nil {
-		var ret interface{}
-		return ret
-	}
-	return o.Support
-}
-
-// GetSupportOk returns a tuple with the Support field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VideoChannelCreate) GetSupportOk() (*interface{}, bool) {
-	if o == nil || utils.IsNil(o.Support) {
-		return nil, false
-	}
-	return &o.Support, true
-}
-
-// HasSupport returns a boolean if a field has been set.
-func (o *VideoChannelCreate) HasSupport() bool {
-	if o != nil && !utils.IsNil(o.Support) {
-		return true
-	}
-
-	return false
-}
-
-// SetSupport gets a reference to the given interface{} and assigns it to the Support field.
-func (o *VideoChannelCreate) SetSupport(v interface{}) {
-	o.Support = v
-}
-
 func (o VideoChannelCreate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -179,16 +175,14 @@ func (o VideoChannelCreate) MarshalJSON() ([]byte, error) {
 
 func (o VideoChannelCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.DisplayName != nil {
-		toSerialize["displayName"] = o.DisplayName
-	}
-	toSerialize["name"] = o.Name
-	if o.Description != nil {
+	toSerialize["displayName"] = o.DisplayName
+	if !utils.IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.Support != nil {
+	if !utils.IsNil(o.Support) {
 		toSerialize["support"] = o.Support
 	}
+	toSerialize["name"] = o.Name
 	return toSerialize, nil
 }
 

@@ -27,18 +27,18 @@ type ApiApiV1VideosIdRatePutRequest struct {
 	ctx                         context.Context
 	ApiService                  *VideoRatesAPIService
 	id                          models.ApiV1VideosOwnershipIdAcceptPostIdParameter
-	apiV1VideosIdRatePutRequest *models.ApiV1VideosIdRatePutRequest
 	xPeertubeVideoPassword      *string
-}
-
-func (r ApiApiV1VideosIdRatePutRequest) ApiV1VideosIdRatePutRequest(apiV1VideosIdRatePutRequest models.ApiV1VideosIdRatePutRequest) ApiApiV1VideosIdRatePutRequest {
-	r.apiV1VideosIdRatePutRequest = &apiV1VideosIdRatePutRequest
-	return r
+	apiV1VideosIdRatePutRequest *models.ApiV1VideosIdRatePutRequest
 }
 
 // Required on password protected video
 func (r ApiApiV1VideosIdRatePutRequest) XPeertubeVideoPassword(xPeertubeVideoPassword string) ApiApiV1VideosIdRatePutRequest {
 	r.xPeertubeVideoPassword = &xPeertubeVideoPassword
+	return r
+}
+
+func (r ApiApiV1VideosIdRatePutRequest) ApiV1VideosIdRatePutRequest(apiV1VideosIdRatePutRequest models.ApiV1VideosIdRatePutRequest) ApiApiV1VideosIdRatePutRequest {
+	r.apiV1VideosIdRatePutRequest = &apiV1VideosIdRatePutRequest
 	return r
 }
 

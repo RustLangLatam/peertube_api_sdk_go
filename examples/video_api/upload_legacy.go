@@ -4,35 +4,37 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/RustLangLatam/peertube_api_sdk_go/api"
 	"log"
 	"os"
 	"time"
+
+	"github.com/RustLangLatam/peertube_api_sdk_go/api"
 )
 
-// main is the entry point of the program.
 func main() {
 	// Define the base URL of the PeerTube instance.
-	const baseUrl = "https://peertube.orderi.co"
-
-	// Create a new context for the API requests.
-	ctx := context.Background()
+	// This URL should be replaced with the actual URL of the PeerTube instance you want to interact with.
+	baseUrl := "https://peertube.orderi.co"
 
 	// Initialize API client
+	// Create a new configuration for the API client using the base URL.
 	config := api.NewConfigurationFromBaseURL(baseUrl)
 
 	// Create a new API client.
+	// This client will be used to make API requests to the PeerTube instance.
 	apiClient := api.NewAPIClient(config)
 
 	// Get the OAuth client from the API.
-	oauthClient, _, err := apiClient.SessionAPI.GetOAuthClient(ctx).Execute()
+	// This is the first step in the OAuth authentication flow.
+	oauthClient, _, err := apiClient.SessionAPI.GetOAuthClient(context.Background()).Execute()
 	if err != nil {
-		// Log the error and exit if it occurs.
+		// If an error occurs, log the error and exit the program.
 		log.Fatal(err)
 	}
 
 	// Create a new OAuth token request.
-	oauthToken, _, err := apiClient.SessionAPI.GetOAuthToken(ctx).
+	// This request will be used to obtain an access token for the API client.
+	oauthToken, _, err := apiClient.SessionAPI.GetOAuthToken(context.Background()).
 		// Set the client ID from the OAuth client.
 		ClientId(oauthClient.GetClientId()).
 		// Set the client secret from the OAuth client.
@@ -43,69 +45,75 @@ func main() {
 		Username("root").
 		// Set the grant type for the OAuth token request.
 		GrantType("password").
+		// Execute the OAuth token request.
 		Execute()
 
 	if err != nil {
-		// Log the error and exit if it occurs.
+		// If an error occurs, log the error and exit the program.
 		log.Fatal(err)
 	}
 
 	// Add the OAuth token to the API client configuration.
+	// This will allow the API client to make authenticated requests to the PeerTube instance.
 	config.AddDefaultHeader("Authorization", "Bearer "+oauthToken.GetAccessToken())
 
-	// Define the file path of the uploadResponse to upload.
-	filePath := "resources/video_test.mp4"
-
-	// Open the uploadResponse file.
-	videoFile, err := os.Open(filePath)
+	// Open the video file.
+	// This file will be uploaded to the PeerTube instance.
+	videoFile, err := os.Open("resources/video_test.mp4")
 	if err != nil {
-		// Log the error and exit if it occurs.
+		// If an error occurs, print the error and return from the function.
 		fmt.Println("Error opening file :", err)
 		return
 	}
+	// Defer closing the video file until the function returns.
+	defer videoFile.Close()
 
-	// Defer the closing of the uploadResponse file.
-	defer func(videoFile *os.File) {
-		// Close the uploadResponse file.
-		err := videoFile.Close()
-		if err != nil {
-			// Log the error if it occurs.
-			log.Println(err)
-		}
-	}(videoFile)
+	// Open the thumbnail file.
+	// This file will be uploaded to the PeerTube instance as the thumbnail for the video.
+	thumbnail, err := os.Open("resources/thumbnail_test.png")
+	if err != nil {
+		// If an error occurs, print the error and return from the function.
+		fmt.Println("Error opening file :", err)
+		return
+	}
+	// Defer closing the thumbnail file until the function returns.
+	defer thumbnail.Close()
 
-	// Upload the uploadResponse using the API client.
-	uploadResponse, _, err := apiClient.VideoAPI.UploadLegacy(ctx).
-		// Set the name of the uploadResponse.
+	// Upload the video using the API client.
+	// This will create a new video on the PeerTube instance.
+	uploadResponse, _, err := apiClient.VideoAPI.UploadLegacy(context.Background()).
+		// Set the name of the video.
 		Name("uploadResponse test sdk golang").
-		// Set the channel ID of the uploadResponse.
+		// Set the channel ID for the video.
 		ChannelId(1).
-		// Set the privacy of the uploadResponse.
+		// Set the privacy level for the video.
 		Privacy(1).
-		// Set the category of the uploadResponse.
+		// Set the category for the video.
 		Category(1).
-		// Set the description of the uploadResponse.
+		// Set the description for the video.
 		Description("test description golang sdk").
-		// Enable comments on the uploadResponse.
+		// Enable comments for the video.
 		CommentsEnabled(true).
-		// Enable downloads of the uploadResponse.
+		// Enable downloads for the video.
 		DownloadEnabled(true).
-		// Set the original publication date of the uploadResponse.
+		// Set the original publication date for the video.
 		OriginallyPublishedAt(time.Now()).
-		// Set the uploadResponse file to upload.
+		// Set the video file for the upload.
 		Videofile(videoFile).
-		// Execute the uploadResponse upload request.
+		// Execute the upload request.
 		Execute()
 
 	if err != nil {
-		// Log the error and exit if it occurs.
+		// If an error occurs, log the error and exit the program.
 		log.Fatal(err)
 	}
 
 	// Marshal the uploadResponse response to JSON.
+	// This will convert the response to a JSON object.
 	video := uploadResponse.GetVideo()
 
 	// Print the uploadResponse response.
+	// This will print the ID, short UUID, and UUID of the newly created video.
 	fmt.Printf("Id: %v\n", video.GetId())
 	fmt.Printf("ShortUUID: %v\n", video.GetShortUUID())
 	fmt.Printf("Uuid: %v\n", video.GetUuid())

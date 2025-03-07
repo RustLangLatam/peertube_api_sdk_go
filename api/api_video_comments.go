@@ -944,18 +944,18 @@ type ApiApiV1VideosIdCommentsCommentIdPostRequest struct {
 	ApiService                             *VideoCommentsAPIService
 	id                                     models.ApiV1VideosOwnershipIdAcceptPostIdParameter
 	commentId                              int32
-	apiV1VideosIdCommentThreadsPostRequest *models.ApiV1VideosIdCommentThreadsPostRequest
 	xPeertubeVideoPassword                 *string
-}
-
-func (r ApiApiV1VideosIdCommentsCommentIdPostRequest) ApiV1VideosIdCommentThreadsPostRequest(apiV1VideosIdCommentThreadsPostRequest models.ApiV1VideosIdCommentThreadsPostRequest) ApiApiV1VideosIdCommentsCommentIdPostRequest {
-	r.apiV1VideosIdCommentThreadsPostRequest = &apiV1VideosIdCommentThreadsPostRequest
-	return r
+	apiV1VideosIdCommentThreadsPostRequest *models.ApiV1VideosIdCommentThreadsPostRequest
 }
 
 // Required on password protected video
 func (r ApiApiV1VideosIdCommentsCommentIdPostRequest) XPeertubeVideoPassword(xPeertubeVideoPassword string) ApiApiV1VideosIdCommentsCommentIdPostRequest {
 	r.xPeertubeVideoPassword = &xPeertubeVideoPassword
+	return r
+}
+
+func (r ApiApiV1VideosIdCommentsCommentIdPostRequest) ApiV1VideosIdCommentThreadsPostRequest(apiV1VideosIdCommentThreadsPostRequest models.ApiV1VideosIdCommentThreadsPostRequest) ApiApiV1VideosIdCommentsCommentIdPostRequest {
+	r.apiV1VideosIdCommentThreadsPostRequest = &apiV1VideosIdCommentThreadsPostRequest
 	return r
 }
 

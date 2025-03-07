@@ -702,8 +702,8 @@ func (a *UsersAPIService) GetUsersExecute(r ApiGetUsersRequest) ([]models.User, 
 type ApiPutUserRequest struct {
 	ctx        context.Context
 	ApiService *UsersAPIService
-	updateUser *models.UpdateUser
 	id         int32
+	updateUser *models.UpdateUser
 }
 
 func (r ApiPutUserRequest) UpdateUser(updateUser models.UpdateUser) ApiPutUserRequest {
@@ -749,11 +749,11 @@ func (a *UsersAPIService) PutUserExecute(r ApiPutUserRequest) (*http.Response, e
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.updateUser == nil {
-		return nil, utils.ReportError("updateUser is required and must be specified")
-	}
 	if r.id < 1 {
 		return nil, utils.ReportError("id must be greater than 1")
+	}
+	if r.updateUser == nil {
+		return nil, utils.ReportError("updateUser is required and must be specified")
 	}
 
 	// to determine the Content-Type header
