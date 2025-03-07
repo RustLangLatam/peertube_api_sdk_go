@@ -2288,7 +2288,7 @@ func (a *VideoAPIService) UploadLegacyExecute(r ApiUploadLegacyRequest) (*models
 		parameterAddToHeaderOrQuery(localVarFormParams, "nsfw", r.nsfw, "", "")
 	}
 	if r.tags != nil {
-		parameterAddToHeaderOrQuery(localVarFormParams, "tags", r.tags, "", "csv")
+		parameterAddToHeaderOrQuery(localVarFormParams, "tags", r.tags, "", "")
 	}
 	if r.commentsEnabled != nil {
 		parameterAddToHeaderOrQuery(localVarFormParams, "commentsEnabled", r.commentsEnabled, "", "")

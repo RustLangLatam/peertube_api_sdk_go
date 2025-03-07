@@ -18,7 +18,7 @@ func main() {
 
 	// Initialize API client
 	// Create a new configuration for the API client using the base URL.
-	config := api.NewConfigurationFromBaseURL(baseUrl)
+	config := api.NewConfigurationFromBaseURL(baseUrl, true)
 
 	// Create a new API client.
 	// This client will be used to make API requests to the PeerTube instance.
@@ -59,7 +59,7 @@ func main() {
 
 	// Open the video file.
 	// This file will be uploaded to the PeerTube instance.
-	videoFile, err := os.Open("resources/video_test.mp4")
+	videoFile, err := os.Open("video_test.mp4")
 	if err != nil {
 		// If an error occurs, print the error and return from the function.
 		fmt.Println("Error opening file :", err)
@@ -70,7 +70,7 @@ func main() {
 
 	// Open the thumbnail file.
 	// This file will be uploaded to the PeerTube instance as the thumbnail for the video.
-	thumbnail, err := os.Open("resources/thumbnail_test.png")
+	thumbnail, err := os.Open("thumbnail_test.png")
 	if err != nil {
 		// If an error occurs, print the error and return from the function.
 		fmt.Println("Error opening file :", err)
@@ -96,10 +96,17 @@ func main() {
 		CommentsEnabled(true).
 		// Enable downloads for the video.
 		DownloadEnabled(true).
+		// Enable wait for transcoding for the video.
+		WaitTranscoding(true).
 		// Set the original publication date for the video.
 		OriginallyPublishedAt(time.Now()).
 		// Set the video file for the upload.
 		Videofile(videoFile).
+		// Set the thumbnail file for the upload.
+		//Thumbnailfile(thumbnail).
+		// Set the tags for the video.
+		Tags([]string{"tag1", "tag2"}).
+
 		// Execute the upload request.
 		Execute()
 
